@@ -1,0 +1,180 @@
+<!DOCTYP html>
+<html>
+<head>
+<title>Playing with Font Awesome!</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+<style>
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: url("icon-bg.jpg") no-repeat center center;
+	background-size: cover;
+	width: 100%;
+	max-width: 100%;
+}
+
+#wrapper {
+	width: 80%;
+	margin: 0 auto;
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.icons-div {
+	margin: 2%;
+	width: 100%;
+	display: flex;
+}
+
+/* To The Right */
+
+.icons-div i {
+	font-size: 100px;
+	margin:0 auto;
+}
+
+#inner-toTheright {
+	margin: 0 auto;
+}
+
+/* auction */
+
+#auction-wrapper {
+	margin: 0 auto;
+	display: flex;
+}
+
+#auction-wrapper #auction-deal {
+	margin: auto;
+	padding: 5%;
+	font-size: 1.5rem;
+}
+
+#auction-wrapper > * {
+	padding-left: 2%;
+	padding-right: 2%;
+}
+
+/* arrows */
+
+#arrows-wrapper {
+	margin: 0 auto;
+	display: flex;
+}
+
+#arrows-wrapper > * {
+	margin: auto;
+}
+
+#arrows-wrapper p {
+	font-size: 2rem;
+	font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<div id="wrapper">
+
+	<div class="icons-div" id="battery-charging">
+		<i class="fas fa-battery-empty"></i>
+	</div>
+	
+	<div class="icons-div" id="to-the-right">
+		<div id="inner-toTheRight">
+			<i class="fas fa-angle-right"></i>
+			<i class="fas fa-angle-right"></i>
+			<i class="fas fa-angle-right"></i>
+		</div>
+	</div>
+	
+	<div class="icons-div" id="auction">
+		<div id="auction-wrapper">
+			<button id="auction-deal" class="btn btn-danger btn-lg">DEAL</button>
+			<i class="fas fa-gavel"></i>
+			<i class="far fa-handshake"></i>
+		</div>
+	</div>
+	
+	<div class="icons-div" id="arrows">
+		<div id="arrows-wrapper">
+			<p>Use your keyboard's arrow keys</p>
+			<i class="fa" id="arrow">&#xf062</i>
+		</div>
+	</div>
+	
+</div>
+
+<script>
+	function charging(){
+		let chargingArr = [
+			"<i class='fas fa-battery-empty'></i>",
+			"<i class='fas fa-battery-quarter'></i>",
+			"<i class='fas fa-battery-half'></i>",
+			"<i class='fas fa-battery-three-quarters'></i>",
+			"<i class='fas fa-battery-full'></i>"
+		];
+		let i=0;
+		let batteryCharging = document.querySelector("#battery-charging");
+		setInterval(() => {		
+			document.querySelector("#battery-charging").innerHTML = chargingArr[i];
+			i++;
+			if(i == chargingArr.length ){i=0};
+			if(i==1){batteryCharging.children[0].style.color = '#ff0000'}
+			if(i==2){batteryCharging.children[0].style.color = '#ff6666'}
+			if(i==3){batteryCharging.children[0].style.color = 'orange'}
+			if(i==4){batteryCharging.children[0].style.color = '#00e673'}
+			if(i==0){batteryCharging.children[0].style.color = '#00994d'}
+		},500);
+	}
+	charging();
+	
+	function arrows(){	
+		let i=0;
+		setInterval(()=> {
+			document.querySelector("#inner-toTheRight").children[i].style.color = "white";
+			i++;
+			if(i==3){
+				i=0;
+			}
+			document.querySelector("#inner-toTheRight").children[i].style.color = "black";
+		}, 1000)
+	}
+	arrows();
+	
+	// auction
+	document.querySelector("#auction-deal").addEventListener('click', () => {
+		document.querySelector(".fa-gavel").style.transform = "rotate(90deg)";
+		setTimeout(() => document.querySelector(".fa-gavel").style.transform = "rotate(0deg)",250);
+		setTimeout(() => document.querySelector(".fa-handshake").style.transform = "translateY(-10%)", 300);
+		setTimeout(() => document.querySelector(".fa-handshake").style.transform = "translateY(0%)", 400);
+		setTimeout(() => document.querySelector(".fa-handshake").style.transform = "translateY(10%)", 500);
+		setTimeout(() => document.querySelector(".fa-handshake").style.transform = "translateY(0%)", 600);
+		setTimeout(() => document.querySelector(".fa-handshake").style.transform = "translateY(-10%)", 700);
+		setTimeout(() => document.querySelector(".fa-handshake").style.transform = "translateY(0%)", 800);
+		setTimeout(() => document.querySelector(".fa-handshake").style.transform = "translateY(10%)", 900);
+		setTimeout(() => document.querySelector(".fa-handshake").style.transform = "translateY(0)", 1000);
+	});
+	
+	// arrows	
+	window.addEventListener('keydown', (e) => {
+		let arrowsObj = {
+			"ArrowUp": '&#xf062',
+			"ArrowDown": '&#xf063',
+			"ArrowLeft": '&#xf060',
+			"ArrowRight": '&#xf061'
+		}
+		for(keys in arrowsObj){
+			if(e.key == keys){
+				document.querySelector("#arrow").innerHTML = arrowsObj[e.key];
+			}
+		}
+	});
+
+</script>
+</body>
+</html>
